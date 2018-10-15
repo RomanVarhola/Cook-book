@@ -1,0 +1,9 @@
+<mz-navbar>
+  <a routerLink="recipes" class="brand-logo">.</a>
+  <mz-navbar-item-container [align]="'right'">
+    <mz-navbar-item><b *ngIf="currentUser">{{currentUser.email}}</b></mz-navbar-item>
+    <mz-navbar-item><a routerLink="login" *ngIf="!currentUser">Login</a></mz-navbar-item>
+    <mz-navbar-item><a routerLink="signup" *ngIf="!currentUser">Sign Up</a></mz-navbar-item>
+    <mz-navbar-item><a (click)="logOut()" *ngIf="currentUser">Log Out</a></mz-navbar-item>
+  </mz-navbar-item-container>
+</mz-navbar>

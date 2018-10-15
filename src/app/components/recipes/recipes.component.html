@@ -1,0 +1,28 @@
+<a routerLink="/recipe/create" class="create-recipe-button" mz-button>Create Recipe</a>
+<br/>
+<table class="striped">
+  <thead>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let recipe of recipes">
+      <td>{{recipe.title}}</td>
+      <td>{{recipe.description}}</td>
+      <td>
+        <a routerLink="/recipe/{{recipe._id}}" class="btn">Show Recipe</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+<mz-pagination *ngIf="recipes"
+  (pageChange)="getRecipesByPage($event)"
+  [currentPage]="this.page"
+  [enableFirstAndLastPageButtons]="false"
+  [itemsPerPage]="this.limit"
+  [totalItems]="this.total"
+>
+</mz-pagination>

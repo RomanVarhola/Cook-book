@@ -1,0 +1,39 @@
+<mz-card class="blue-grey darken-1 white-text" [horizontal]="true" *ngIf="recipe">
+  <mz-card-title>
+    {{recipe.title}}.
+  </mz-card-title>
+  <mz-card-content>
+    {{recipe.description}}
+  </mz-card-content>
+  <mz-card-action>
+    <a routerLink="/recipes">Go to recipes</a>
+    <a mz-button (click)="deleteRecipe(recipe.id)">Delete recipe</a>
+  </mz-card-action>
+</mz-card>
+
+<h1>Recipe Form</h1>
+
+<form [formGroup]="recipeForm" (ngSubmit)="submitForm()" novalidate>
+  <div class="form-group">
+    <mz-input-container>
+      <input mz-input
+        [label]="'Title'"
+        formControlName="title"
+        [validate]="true"
+        id="email-input"
+        placeholder="Enter title"
+        length="30"
+        type="text">
+    </mz-input-container>
+    <mz-textarea-container>
+      <textarea mz-textarea
+        [label]="'Description'"
+        formControlName="description"
+        id="comment-textarea"
+        placeholder="Enter description"
+        length="150"></textarea>
+    </mz-textarea-container>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!recipeForm.valid" type="submit">Submit</button>
+</form>

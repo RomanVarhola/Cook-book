@@ -1,0 +1,26 @@
+<h1>New Recipe</h1>
+
+<form [formGroup]="newRecipe" (ngSubmit)="createRecipe()" novalidate>
+  <div class="form-group">
+    <mz-input-container>
+      <input mz-input
+        [label]="'Title'"
+        formControlName="title"
+        [validate]="true"
+        id="email-input"
+        placeholder="Enter title"
+        length="30"
+        type="text">
+    </mz-input-container>
+    <mz-textarea-container>
+      <textarea mz-textarea
+        [label]="'Description'"
+        formControlName="description"
+        id="comment-textarea"
+        placeholder="Enter description"
+        length="150"></textarea>
+    </mz-textarea-container>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!newRecipe.valid" type="submit">Submit</button>
+</form>
