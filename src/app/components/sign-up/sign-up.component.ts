@@ -10,7 +10,6 @@ import {AuthService} from '../../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
-  loading = false;
   submitted = false;
   error = '';
 
@@ -43,6 +42,7 @@ export class SignUpComponent implements OnInit {
     if (this.signUpForm.invalid) {
       return;
     }
+
     this.authService.signUp(this.signUpForm.value)
       .subscribe(res => {
         localStorage.setItem('currentUser', JSON.stringify({token: res.data.token, user: res.data.user}));

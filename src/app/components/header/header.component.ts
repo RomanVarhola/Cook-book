@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service'
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,23 +8,20 @@ import {AuthService} from '../../services/auth.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  public currentUser;
-  public headerData: number = 0;
+  currentUser: any;
 
   constructor(private router: Router,
               private authService: AuthService) {
   }
 
   ngOnInit() {
-    if(localStorage.getItem('currentUser')) {
-      this.getCurrentUser();
-    }
+    this.getCurrentUser();
   }
 
   getCurrentUser(): void {
-    this.authService.getCurrentUser()
-      .subscribe(res => {
-        this.currentUser = res.data.user;
+    this.authService.getCurrentUser
+      .subscribe((user) => {
+        this.currentUser = user;
       });
   }
 

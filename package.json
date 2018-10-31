@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server-test": "mocha server/tests/*.js",
-    "postinstall": "ng build --aot -prod"
+    "server-test": "mocha server/tests/*.js"
   },
   "private": true,
   "dependencies": {

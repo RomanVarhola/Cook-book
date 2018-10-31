@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpRequest} from '@angular/common/http';
+import {Injectable, Output, EventEmitter} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
@@ -9,18 +9,17 @@ import config from '../config/index';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
-  }
+  @Output() getCurrentUser: EventEmitter<any> = new EventEmitter();
 
-  getCurrentUser(): Observable<any> {
-    return this.http.get(`${config.apiUrl}/me`);
+  constructor(private http: HttpClient) {
   }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${config.apiUrl}/login`, {email, password}).pipe(
-      tap(res => { 
+      tap(res => {
         const data = res.data;
         if (data.user && data.token) {
+          this.getCurrentUser.emit(data.user);
           localStorage.setItem('currentUser',
             JSON.stringify({email: data.user.email, token: data.token}));
         }
@@ -30,11 +29,12 @@ export class AuthService {
 
   signUp(data: {}): Observable<any> {
     return this.http.post(`${config.apiUrl}/register`, data).pipe(
-      tap(res => { 
-        const data = res.data;
-        if (data.user && data.token) {
+      tap(res => {
+        const dataObj = res.data;
+        if (dataObj.user && dataObj.token) {
+          this.getCurrentUser.emit(dataObj.user);
           localStorage.setItem('currentUser',
-            JSON.stringify({email: data.user.email, token: data.token}));
+            JSON.stringify({email: dataObj.user.email, token: dataObj.token}));
         }
       })
     );

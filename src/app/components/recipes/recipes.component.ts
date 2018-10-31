@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../../services/recipe.service';
-import {MatTableDataSource, MatSort} from '@angular/material';
-import {DataSource} from '@angular/cdk/table';
-import {Recipe} from './../../interfaces/recipe.interface';
+import {Recipe} from '../../interfaces/recipe.interface';
 
 @Component({
   selector: 'app-recipes',
@@ -34,7 +32,7 @@ export class RecipesComponent implements OnInit {
     this.recipeService.getRecipesByPage(page)
       .subscribe((res: any) => {
         this.getData(res.data);
-      }); 
+      });
   }
 
   getData(res): void {

@@ -41,7 +41,7 @@ export class LogInComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    
+
     this.authService.login(this.f.email.value, this.f.password.value)
       .subscribe(res => {
         this.router.navigate(['/']);
